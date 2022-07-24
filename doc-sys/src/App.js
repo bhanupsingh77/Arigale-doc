@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import MdDoc from "./components/MdDoc";
+import Auth from "./components/Auth";
+import Dashboard from "./components/Dashboard";
+
 function App() {
   const [client, setClient] = useState(null);
-  return (
+  console.log(client);
+  return client ? (
+    <Dashboard client={client} />
+  ) : (
     <div>
-      <MdDoc />
+      <Auth setClient={setClient} />
     </div>
   );
 }

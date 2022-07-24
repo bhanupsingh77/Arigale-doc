@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Web3Storage } from "web3.storage";
+import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
 
-export default function Auth() {
+export default function Auth({ setClient }) {
   const [token, setToken] = useState("");
 
   const handleChange = (event) => {
@@ -11,15 +11,22 @@ export default function Auth() {
   };
 
   const handleClick = async () => {
-    // const validation = await validateToken(token);
-    const web3storage = new Web3Storage({ token });
-    const files = [new File(["validation"], "validation.txt")];
-    const cid = await web3storage.put(files);
-    console.log("winner is:" + cid);
+    const validation = await validateToken(token);
+    // const web3storage = new Web3Storage({ token });
+    // const files = [new File(["validation"], "validation.txt")];
+    // const cid = await web3storage.put(files);
+    // console.log("winner is:" + cid);
+    console.log("validation", validation);
+    if (validation) {
+      const web3storage = new Web3Storage({ token: token });
+      setClient(web3storage);
+    } else {
+      alert("wrong token");
+    }
   };
-  async function validateToken(token1) {
-    console.log("validating token", typeof token1);
-    const web3storage = new Web3Storage({ token: `${token1}` });
+  async function validateToken(token) {
+    console.log("validating token", typeof token);
+    const web3storage = new Web3Storage({ token });
     console.log(web3storage.list({ maxResults: 1 }));
     try {
       for await (const _ of web3storage.list({ maxResults: 1 })) {

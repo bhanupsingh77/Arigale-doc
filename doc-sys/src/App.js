@@ -4,7 +4,6 @@ import Dashboard from "./components/Dashboard";
 
 function App() {
   const [client, setClient] = useState(null);
-  console.log(client);
   return client ? (
     <Dashboard client={client} />
   ) : (

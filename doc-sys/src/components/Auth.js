@@ -78,6 +78,7 @@ export default function Auth({ setClient }) {
           <a
             className="text-sky-500"
             target="_blank"
+            rel="noreferrer"
             href="https://web3.storage/docs/how-tos/generate-api-token/"
           >
             {` Click here`}
